@@ -3,21 +3,19 @@
 
 import Data.Foldable     (for_)
 import Test.Hspec        (Spec, describe, it, shouldBe)
-import Test.Hspec.Runner (configFastFail, defaultConfig, hspecWith)
+import Test.Hspec.Runner (defaultConfig, hspecWith)
 
 import CollatzConjecture (collatz)
 
 main :: IO ()
-main = hspecWith defaultConfig {configFastFail = True} specs
+main = hspecWith defaultConfig specs
 
 specs :: Spec
 specs = describe "collatz" $ for_ cases test
   where
-
     test Case{..} = it description assertion
       where
         assertion = collatz number `shouldBe` expected
-
 
 data Case = Case { description :: String
                  , number      :: Integer
@@ -50,5 +48,3 @@ cases = [ Case { description = "zero steps for one"
                , expected    = Nothing
                }
         ]
-
--- 553e2f7a6ce638a6cf622985b9138e6013626eb3
