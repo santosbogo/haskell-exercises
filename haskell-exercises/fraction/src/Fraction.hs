@@ -2,30 +2,21 @@ module Fraction (Fraction, add, sub, mul, divide, hcf) where
 
 type Fraction = (Int, Int)
 
--- Implement the `add` Function
-
 add :: Fraction -> Fraction -> Fraction
-add n d = error "Implement it"
-
--- Implement the `sub` Function
+add (a, b) (c, d) = simplify(a * d + b * c, b * d)
 
 sub :: Fraction -> Fraction -> Fraction
-sub n d = error "Implement it"
-
--- Implement the `mul` Function
+sub (a, b) (c, d) = simplify(a * d - b * c, b * d)
 
 mul :: Fraction -> Fraction -> Fraction
-mul n d = error "Implement it"
-
--- Implement the `divide` Function
+mul (a, b) (c, d) = simplify(a * c, b * d)
 
 divide :: Fraction -> Fraction -> Fraction
-divide n d = error "Implement it"
-
--- Implement the `hcf` Function
+divide (a, b) (c, d) = simplify(a * d, b * c)
 
 hcf :: Int -> Int -> Int
-hcf n d = error "Implement it"
+hcf a 0 = abs a
+hcf a b = hcf b (a `mod` b)
 
-
-    
+simplify :: Fraction -> Fraction
+simplify (a, b) = (a `div` (hcf a b), b `div` (hcf a b))
